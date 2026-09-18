@@ -19,8 +19,9 @@ import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:5173", "https://employee-management-system-frontend-hazel.vercel.app/"})
 @RestController
-@RequestMapping("api/v1/")
+@RequestMapping("/api/v1")
 public class EmployeeController {
+
     private final EmployeeService employeeService;
 
     @Autowired
@@ -49,7 +50,7 @@ public class EmployeeController {
         return new ResponseEntity<>(allEmployee, HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("employees/{id}")
+    @GetMapping("/employees/{id}")
     public ResponseEntity<Employee> getEmployee(
             @PathVariable
             long id
@@ -63,7 +64,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @DeleteMapping("employees/{id}")
+    @DeleteMapping("/employees/{id}")
     public ResponseEntity<Employee> deleteEmployee(
             @PathVariable
             long id
@@ -77,7 +78,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @PutMapping("employees/{id}")
+    @PutMapping("/employees/{id}")
     public ResponseEntity<Employee> updateEmployee(
             @PathVariable
             Long id,
