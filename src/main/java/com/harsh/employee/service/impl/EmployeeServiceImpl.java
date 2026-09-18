@@ -35,18 +35,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(long id) {
-        EmployeeDto employeeDto = employeeRepository.findById(id).orElse(null);
-
-        if (employeeDto == null) {
-            return null;
-        }
-
-        return new Employee(
-                employeeDto.getId(),
-                employeeDto.getFirstName(),
-                employeeDto.getLastName(),
-                employeeDto.getEmailId()
-        );
+        return employeeRepository.findById(id)
+                .map(this::fromEntity)
+                .orElse(null);
     }
 
     @Override
