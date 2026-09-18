@@ -31,11 +31,12 @@ class EmployeeMapperTest {
 
     @Test
     void copiesFieldsOntoProvidedEntityWithoutReplacingIt() {
-        EmployeeEntity entity = entity(9L);
+        EmployeeDto dto = dto();
+        dto.setId(9L);
 
-        EmployeeEntity result = EmployeeMapper.copyInto(entity, dto());
+        EmployeeEntity result = EmployeeMapper.copyInto(entity(1L), dto);
 
-        assertEquals(entity, result);
+        assertEquals(entity(9L), result);
         assertEquals(9L, result.getId());
         assertEquals("ada", result.getFirstName());
     }
