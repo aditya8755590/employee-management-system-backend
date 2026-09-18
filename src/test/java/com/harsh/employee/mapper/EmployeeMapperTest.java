@@ -41,6 +41,24 @@ class EmployeeMapperTest {
         assertEquals("ada", result.getFirstName());
     }
 
+    @Test
+    void overwritesAllFieldsWhenDtoValuesAreNull() {
+        EmployeeDto dto = new EmployeeDto();
+
+        EmployeeEntity result = EmployeeMapper.copyInto(entity(5L), dto);
+
+        assertEquals(new EmployeeEntity(), result);
+    }
+
+    @Test
+    void mapsBoundaryIdValuesWithoutTruncation() {
+        long maxId = Long.MAX_VALUE;
+
+        EmployeeDto dto = EmployeeMapper.fromEntity(entity(maxId));
+
+        assertEquals(maxId, dto.getId());
+    }
+
     private EmployeeEntity entity(Long id) {
         EmployeeEntity entity = new EmployeeEntity();
         entity.setId(id);
