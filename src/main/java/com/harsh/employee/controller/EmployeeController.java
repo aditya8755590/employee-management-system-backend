@@ -58,7 +58,7 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployeeById(id);
 
         if(employee == null) {
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
         return new ResponseEntity<>(employee, HttpStatus.OK);
@@ -72,7 +72,7 @@ public class EmployeeController {
         Employee employee = employeeService.deleteEmployeeById(id);
 
         if(employee == null) {
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
         return new ResponseEntity<>(employee, HttpStatus.OK);
