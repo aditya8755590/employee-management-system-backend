@@ -1,5 +1,6 @@
 package com.harsh.employee.controller;
 
+import com.harsh.employee.api.ApiPaths;
 import com.harsh.employee.model.EmployeeDto;
 import com.harsh.employee.service.EmployeeService;
 import org.junit.jupiter.api.Test;
@@ -29,11 +30,13 @@ class EmployeeControllerTest {
     @MockBean
     private EmployeeService employeeService;
 
+    private static final String BASE = ApiPaths.API_VERSION + ApiPaths.EMPLOYEES;
+
     @Test
     void createEmployeeReturnsCreatedWithBody() throws Exception {
         when(employeeService.createEmployee(any(EmployeeDto.class))).thenReturn(dto(1L));
 
-        mockMvc.perform(post("/api/v1/employees")
+        mockMvc.perform(post(BASE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"firstName\":\"ada\"}"))
                 .andExpect(status().isCreated())
@@ -44,7 +47,7 @@ class EmployeeControllerTest {
     void getAllEmployeesReturnsOkWithList() throws Exception {
         when(employeeService.getAllEmployees()).thenReturn(List.of(dto(1L), dto(2L)));
 
-        mockMvc.perform(get("/api/v1/employees"))
+        mockMvc.perform(get(BASE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2));
     }
@@ -53,7 +56,7 @@ class EmployeeControllerTest {
     void getAllEmployeesReturnsNoContentWhenEmpty() throws Exception {
         when(employeeService.getAllEmployees()).thenReturn(List.of());
 
-        mockMvc.perform(get("/api/v1/employees"))
+        mockMvc.perform(get(BASE))
                 .andExpect(status().isNoContent());
     }
 
@@ -61,7 +64,7 @@ class EmployeeControllerTest {
     void getEmployeeReturnsOkWithBodyWhenFound() throws Exception {
         when(employeeService.getEmployeeById(7L)).thenReturn(dto(7L));
 
-        mockMvc.perform(get("/api/v1/employees/7"))
+        mockMvc.perform(get(BASE + "/7"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(7));
     }
@@ -70,7 +73,7 @@ class EmployeeControllerTest {
     void getEmployeeReturnsNoContentWhenMissing() throws Exception {
         when(employeeService.getEmployeeById(99L)).thenReturn(null);
 
-        mockMvc.perform(get("/api/v1/employees/99"))
+        mockMvc.perform(get(BASE + "/99"))
                 .andExpect(status().isNoContent());
     }
 
@@ -78,7 +81,7 @@ class EmployeeControllerTest {
     void updateEmployeeReturnsOkWithBody() throws Exception {
         when(employeeService.updateEmployee(any(), any(EmployeeDto.class))).thenReturn(dto(7L));
 
-        mockMvc.perform(put("/api/v1/employees/7")
+        mockMvc.perform(put(BASE + "/7")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"id\":7,\"firstName\":\"ada\"}"))
                 .andExpect(status().isOk())
@@ -89,7 +92,7 @@ class EmployeeControllerTest {
     void deleteEmployeeReturnsOkWithBodyWhenDeleted() throws Exception {
         when(employeeService.deleteEmployeeById(7L)).thenReturn(dto(7L));
 
-        mockMvc.perform(delete("/api/v1/employees/7"))
+        mockMvc.perform(delete(BASE + "/7"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(7));
     }
