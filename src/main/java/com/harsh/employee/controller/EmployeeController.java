@@ -44,7 +44,7 @@ public class EmployeeController {
         List<Employee> allEmployee = employeeService.getAllEmployee();
 
         if(!allEmployee.isEmpty()) {
-            return new ResponseEntity<>(allEmployee, HttpStatus.OK);
+            return ResponseEntity.ok(allEmployee);
         }
         
         return new ResponseEntity<>(allEmployee, HttpStatus.NO_CONTENT);
