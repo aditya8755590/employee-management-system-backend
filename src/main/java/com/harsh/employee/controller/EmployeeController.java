@@ -40,7 +40,7 @@ public class EmployeeController {
             return ResponseEntity.ok(allEmployees);
         }
         
-        return new ResponseEntity<>(allEmployees, HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/employees/{id}")
@@ -48,7 +48,7 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployeeById(id);
 
         if(employee == null) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.noContent().build();
         }
 
         return new ResponseEntity<>(employee, HttpStatus.OK);
@@ -59,7 +59,7 @@ public class EmployeeController {
         Employee employee = employeeService.deleteEmployeeById(id);
 
         if(employee == null) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.noContent().build();
         }
 
         return new ResponseEntity<>(employee, HttpStatus.OK);
