@@ -51,7 +51,7 @@ public class EmployeeController {
             return ResponseEntity.noContent().build();
         }
 
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+        return ResponseEntity.ok(employee);
     }
 
     @DeleteMapping("/employees/{id}")
@@ -62,7 +62,7 @@ public class EmployeeController {
             return ResponseEntity.noContent().build();
         }
 
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+        return ResponseEntity.ok(employee);
     }
 
     @PutMapping("/employees/{id}")
