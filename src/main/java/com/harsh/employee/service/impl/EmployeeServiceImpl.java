@@ -46,12 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
 
         if(employeeDto != null) {
-            return new Employee(
-                    employeeDto.getId(),
-                    employeeDto.getFirstName(),
-                    employeeDto.getLastName(),
-                    employeeDto.getEmailId()
-            );
+            return fromEntity(employeeDto);
         }
 
         return null;
