@@ -31,14 +31,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeById(long id) {
+    public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id)
                 .map(this::fromEntity)
                 .orElse(null);
     }
 
     @Override
-    public Employee deleteEmployeeById(long id) {
+    public Employee deleteEmployeeById(Long id) {
         return employeeRepository.findById(id)
                 .map(employeeDto -> {
                     employeeRepository.deleteById(id);
