@@ -38,16 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto deleteEmployeeById(Long id) {
-        return employeeRepository.findById(id)
-                .map(entity -> {
-                    employeeRepository.deleteById(id);
-                    return EmployeeMapper.fromEntity(entity);
-                })
-                .orElse(null);
-    }
-
-    @Override
     public EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto) {
         EmployeeEntity entity = employeeRepository.findById(id).orElse(null);
 
@@ -58,5 +48,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.save(EmployeeMapper.copyInto(entity, employeeDto));
 
         return employeeDto;
+    }
+
+    @Override
+    public EmployeeDto deleteEmployeeById(Long id) {
+        return employeeRepository.findById(id)
+                .map(entity -> {
+                    employeeRepository.deleteById(id);
+                    return EmployeeMapper.fromEntity(entity);
+                })
+                .orElse(null);
     }
 }

@@ -33,14 +33,6 @@ public interface EmployeeService {
     EmployeeDto getEmployeeById(Long id);
 
     /**
-     * Remove an employee and return the deleted record.
-     *
-     * @param id primary key of the employee to delete
-     * @return deleted employee or {@code null} when not found
-     */
-    EmployeeDto deleteEmployeeById(Long id);
-
-    /**
      * Replace mutable fields of an existing employee.
      *
      * @param id         primary key of the target employee
@@ -48,4 +40,12 @@ public interface EmployeeService {
      * @return updated employee or {@code null} when not found
      */
     EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto);
+
+    /**
+     * Remove an employee and return the deleted record.
+     *
+     * @param id primary key of the employee to delete
+     * @return deleted employee or {@code null} when not found
+     */
+    EmployeeDto deleteEmployeeById(Long id);
 }
