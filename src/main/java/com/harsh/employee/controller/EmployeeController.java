@@ -86,7 +86,7 @@ public class EmployeeController {
             Employee employee
     ) {
         employeeService.updateEmployee(id, employee);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+        return ResponseEntity.ok(employee);
     }
 
 }
