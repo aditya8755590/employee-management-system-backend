@@ -26,10 +26,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> createEmployee(
-            @RequestBody
-            Employee employee
-    ) {
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee savedEmployee = employeeService.createEmployee(employee);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
@@ -47,10 +44,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getEmployee(
-            @PathVariable
-            long id
-    ) {
+    public ResponseEntity<Employee> getEmployee(@PathVariable long id) {
         Employee employee = employeeService.getEmployeeById(id);
 
         if(employee == null) {
@@ -61,10 +55,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
-    public ResponseEntity<Employee> deleteEmployee(
-            @PathVariable
-            long id
-    ) {
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable long id) {
         Employee employee = employeeService.deleteEmployeeById(id);
 
         if(employee == null) {
@@ -75,12 +66,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(
-            @PathVariable
-            Long id,
-            @RequestBody
-            Employee employee
-    ) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
         employeeService.updateEmployee(id, employee);
         return ResponseEntity.ok(employee);
     }
