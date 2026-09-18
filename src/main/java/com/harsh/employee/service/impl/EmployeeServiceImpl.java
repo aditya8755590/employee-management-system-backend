@@ -1,7 +1,7 @@
 package com.harsh.employee.service.impl;
 
 import com.harsh.employee.entity.EmployeeEntity;
-import com.harsh.employee.model.Employee;
+import com.harsh.employee.model.EmployeeDto;
 import com.harsh.employee.repository.EmployeeRepository;
 import com.harsh.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +17,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     @Override
-    public Employee createEmployee(Employee employee) {
+    public EmployeeDto createEmployee(EmployeeDto employee) {
         employeeRepository.save(toEntity(employee));
         return employee;
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<EmployeeDto> getAllEmployees() {
         return employeeRepository.findAll()
                 .stream()
                 .map(this::fromEntity)
@@ -31,14 +31,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeById(Long id) {
+    public EmployeeDto getEmployeeById(Long id) {
         return employeeRepository.findById(id)
                 .map(this::fromEntity)
                 .orElse(null);
     }
 
     @Override
-    public Employee deleteEmployeeById(Long id) {
+    public EmployeeDto deleteEmployeeById(Long id) {
         return employeeRepository.findById(id)
                 .map(entity -> {
                     employeeRepository.deleteById(id);
@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmployee(Long id, Employee employee) {
+    public EmployeeDto updateEmployee(Long id, EmployeeDto employee) {
         EmployeeEntity entity = employeeRepository.findById(id).orElse(null);
 
         if (entity == null) {
@@ -61,8 +61,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    private Employee fromEntity(EmployeeEntity entity) {
-        return new Employee(
+    private EmployeeDto fromEntity(EmployeeEntity entity) {
+        return new EmployeeDto(
                 entity.getId(),
                 entity.getFirstName(),
                 entity.getLastName(),
@@ -70,7 +70,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         );
     }
 
-    private EmployeeEntity toEntity(Employee employee) {
+    private EmployeeEntity toEntity(EmployeeDto employee) {
         EmployeeEntity employeeDto = new EmployeeEntity();
 
         BeanUtils.copyProperties(employee, employeeDto);

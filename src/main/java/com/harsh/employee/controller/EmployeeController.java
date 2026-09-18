@@ -1,6 +1,6 @@
 package com.harsh.employee.controller;
 
-import com.harsh.employee.model.Employee;
+import com.harsh.employee.model.EmployeeDto;
 import com.harsh.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,15 +26,15 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee savedEmployee = employeeService.createEmployee(employee);
+    public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employee) {
+        EmployeeDto savedEmployee = employeeService.createEmployee(employee);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> allEmployees = employeeService.getAllEmployees();
+    public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
+        List<EmployeeDto> allEmployees = employeeService.getAllEmployees();
 
         if(!allEmployees.isEmpty()) {
             return ResponseEntity.ok(allEmployees);
@@ -44,8 +44,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getEmployee(@PathVariable long id) {
-        Employee employee = employeeService.getEmployeeById(id);
+    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable long id) {
+        EmployeeDto employee = employeeService.getEmployeeById(id);
 
         if(employee == null) {
             return ResponseEntity.noContent().build();
@@ -55,14 +55,14 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto employee) {
         employeeService.updateEmployee(id, employee);
         return ResponseEntity.ok(employee);
     }
 
     @DeleteMapping("/employees/{id}")
-    public ResponseEntity<Employee> deleteEmployee(@PathVariable long id) {
-        Employee employee = employeeService.deleteEmployeeById(id);
+    public ResponseEntity<EmployeeDto> deleteEmployee(@PathVariable long id) {
+        EmployeeDto employee = employeeService.deleteEmployeeById(id);
 
         if(employee == null) {
             return ResponseEntity.noContent().build();

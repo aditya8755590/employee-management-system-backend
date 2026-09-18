@@ -1,18 +1,18 @@
 package com.harsh.employee.service;
 
-import com.harsh.employee.model.Employee;
+import com.harsh.employee.model.EmployeeDto;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    Employee createEmployee(Employee employee);
+    EmployeeDto createEmployee(EmployeeDto employee);
 
-    List<Employee> getAllEmployees();
+    List<EmployeeDto> getAllEmployees();
 
-    Employee getEmployeeById(Long id);
+    EmployeeDto getEmployeeById(Long id);
 
-    Employee deleteEmployeeById(Long id);
+    EmployeeDto deleteEmployeeById(Long id);
 
-    Employee updateEmployee(Long id, Employee employee);
+    EmployeeDto updateEmployee(Long id, EmployeeDto employee);
 }
