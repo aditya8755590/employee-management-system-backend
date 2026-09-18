@@ -39,14 +39,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee deleteEmployeeById(long id) {
-        EmployeeDto employeeDto = employeeRepository.findById(id).orElse(null);
-        employeeRepository.deleteById(id);
-
-        if(employeeDto != null) {
-            return fromEntity(employeeDto);
-        }
-
-        return null;
+        return employeeRepository.findById(id)
+                .map(employeeDto -> {
+                    employeeRepository.deleteById(id);
+                    return fromEntity(employeeDto);
+                })
+                .orElse(null);
     }
 
     @Override
