@@ -2,7 +2,7 @@ package com.harsh.employee.controller;
 
 import com.harsh.employee.model.Employee;
 import com.harsh.employee.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,15 +19,11 @@ import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:5173", "https://employee-management-system-frontend-hazel.vercel.app/"})
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-
-    @Autowired
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @PostMapping("/employees")
     public ResponseEntity<Employee> createEmployee(
