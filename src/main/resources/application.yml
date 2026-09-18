@@ -1,4 +1,4 @@
-spring :
+spring:
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:employee_db}
     username: ${POSTGRES_USER:root}
