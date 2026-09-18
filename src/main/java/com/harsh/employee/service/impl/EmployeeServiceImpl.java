@@ -4,21 +4,17 @@ import com.harsh.employee.entity.EmployeeDto;
 import com.harsh.employee.model.Employee;
 import com.harsh.employee.repository.EmployeeRepository;
 import com.harsh.employee.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
-
-    @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 
     @Override
     public Employee createEmployee(Employee employee) {
