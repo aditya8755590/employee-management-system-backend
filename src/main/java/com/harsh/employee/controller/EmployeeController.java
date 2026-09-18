@@ -39,7 +39,7 @@ public class EmployeeController {
         if(!allEmployees.isEmpty()) {
             return ResponseEntity.ok(allEmployees);
         }
-        
+
         return ResponseEntity.noContent().build();
     }
 
@@ -70,5 +70,4 @@ public class EmployeeController {
 
         return ResponseEntity.ok(employee);
     }
-
 }
