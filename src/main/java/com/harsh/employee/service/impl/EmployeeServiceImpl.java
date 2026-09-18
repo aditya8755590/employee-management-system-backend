@@ -40,33 +40,33 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee deleteEmployeeById(Long id) {
         return employeeRepository.findById(id)
-                .map(employeeDto -> {
+                .map(entity -> {
                     employeeRepository.deleteById(id);
-                    return fromEntity(employeeDto);
+                    return fromEntity(entity);
                 })
                 .orElse(null);
     }
 
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
-        EmployeeDto employeeDto = employeeRepository.findById(id).orElse(null);
+        EmployeeDto entity = employeeRepository.findById(id).orElse(null);
 
-        if (employeeDto == null) {
+        if (entity == null) {
             return null;
         }
 
-        BeanUtils.copyProperties(employee, employeeDto);
-        employeeRepository.save(employeeDto);
+        BeanUtils.copyProperties(employee, entity);
+        employeeRepository.save(entity);
 
         return employee;
     }
 
-    private Employee fromEntity(EmployeeDto employeeDto) {
+    private Employee fromEntity(EmployeeDto entity) {
         return new Employee(
-                employeeDto.getId(),
-                employeeDto.getFirstName(),
-                employeeDto.getLastName(),
-                employeeDto.getEmailId()
+                entity.getId(),
+                entity.getFirstName(),
+                entity.getLastName(),
+                entity.getEmailId()
         );
     }
 
