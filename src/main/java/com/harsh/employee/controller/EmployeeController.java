@@ -36,14 +36,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAllEmployee() {
-        List<Employee> allEmployee = employeeService.getAllEmployee();
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> allEmployees = employeeService.getAllEmployees();
 
-        if(!allEmployee.isEmpty()) {
-            return ResponseEntity.ok(allEmployee);
+        if(!allEmployees.isEmpty()) {
+            return ResponseEntity.ok(allEmployees);
         }
         
-        return new ResponseEntity<>(allEmployee, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(allEmployees, HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/employees/{id}")
