@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * REST endpoints exposing employee CRUD operations under {@code /api/v1}.
+ */
 @CrossOrigin(origins = {"http://localhost:5173", "https://employee-management-system-frontend-hazel.vercel.app/"})
 @RestController
 @RequiredArgsConstructor
