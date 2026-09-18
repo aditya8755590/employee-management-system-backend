@@ -40,7 +40,7 @@ The Employee Management System (EMS) backend is a RESTful API developed using Sp
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/employee-management-system-backend.git
+   git clone https://github.com/aditya8755590/employee-management-system-backend.git
    cd employee-management-system-backend
    ```
 
