@@ -27,15 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getAllEmployees() {
-        List<EmployeeDto> employeesDto = employeeRepository.findAll();
-
-        return employeesDto
+        return employeeRepository.findAll()
                 .stream()
-                .map((empDto) ->
-                        new Employee(empDto.getId(),
-                                empDto.getFirstName(),
-                                empDto.getLastName(),
-                                empDto.getEmailId()))
+                .map(this::fromEntity)
                 .collect(Collectors.toList());
     }
 
@@ -87,5 +81,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-
+    private Employee fromEntity(EmployeeDto employeeDto) {
+        return new Employee(
+                employeeDto.getId(),
+                employeeDto.getFirstName(),
+                employeeDto.getLastName(),
+                employeeDto.getEmailId()
+        );
+    }
 }
