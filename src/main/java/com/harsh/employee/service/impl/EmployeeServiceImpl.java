@@ -1,6 +1,6 @@
 package com.harsh.employee.service.impl;
 
-import com.harsh.employee.entity.EmployeeDto;
+import com.harsh.employee.entity.EmployeeEntity;
 import com.harsh.employee.model.Employee;
 import com.harsh.employee.repository.EmployeeRepository;
 import com.harsh.employee.service.EmployeeService;
@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
-        EmployeeDto entity = employeeRepository.findById(id).orElse(null);
+        EmployeeEntity entity = employeeRepository.findById(id).orElse(null);
 
         if (entity == null) {
             return null;
@@ -61,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    private Employee fromEntity(EmployeeDto entity) {
+    private Employee fromEntity(EmployeeEntity entity) {
         return new Employee(
                 entity.getId(),
                 entity.getFirstName(),
@@ -70,8 +70,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         );
     }
 
-    private EmployeeDto toEntity(Employee employee) {
-        EmployeeDto employeeDto = new EmployeeDto();
+    private EmployeeEntity toEntity(Employee employee) {
+        EmployeeEntity employeeDto = new EmployeeEntity();
 
         BeanUtils.copyProperties(employee, employeeDto);
         return employeeDto;
