@@ -1,5 +1,6 @@
 package com.harsh.employee.controller;
 
+import com.harsh.employee.api.ApiPaths;
 import com.harsh.employee.model.EmployeeDto;
 import com.harsh.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -20,19 +21,19 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:5173", "https://employee-management-system-frontend-hazel.vercel.app/"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping(ApiPaths.API_VERSION)
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/employees")
+    @PostMapping(ApiPaths.EMPLOYEES)
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employee) {
         EmployeeDto savedEmployee = employeeService.createEmployee(employee);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
     }
 
-    @GetMapping("/employees")
+    @GetMapping(ApiPaths.EMPLOYEES)
     public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
         List<EmployeeDto> allEmployees = employeeService.getAllEmployees();
 
@@ -43,7 +44,7 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping(ApiPaths.EMPLOYEE_BY_ID)
     public ResponseEntity<EmployeeDto> getEmployee(@PathVariable long id) {
         EmployeeDto employee = employeeService.getEmployeeById(id);
 
@@ -54,13 +55,13 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping(ApiPaths.EMPLOYEE_BY_ID)
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto employee) {
         employeeService.updateEmployee(id, employee);
         return ResponseEntity.ok(employee);
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping(ApiPaths.EMPLOYEE_BY_ID)
     public ResponseEntity<EmployeeDto> deleteEmployee(@PathVariable long id) {
         EmployeeDto employee = employeeService.deleteEmployeeById(id);
 
