@@ -18,10 +18,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        EmployeeDto employeeDto = new EmployeeDto();
-
-        BeanUtils.copyProperties(employee, employeeDto);
-        employeeRepository.save(employeeDto);
+        employeeRepository.save(toEntity(employee));
         return employee;
     }
 
@@ -74,5 +71,12 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employeeDto.getLastName(),
                 employeeDto.getEmailId()
         );
+    }
+
+    private EmployeeDto toEntity(Employee employee) {
+        EmployeeDto employeeDto = new EmployeeDto();
+
+        BeanUtils.copyProperties(employee, employeeDto);
+        return employeeDto;
     }
 }
